@@ -32,8 +32,11 @@ def calculate_daily_water_usage(members: int) -> int:
     return members * 135
 
 @tool
-def estimate_tank_duration(tank_capacity: int, daily_usage: int) -> float:
-    """Calculate how many days the water tank will last given its capacity and daily usage."""
+def estimate_tank_duration(input_str: str) -> float:
+    """Calculate how many days the water tank will last. Input should be 'tank_capacity,daily_usage' as two comma-separated integers in liters."""
+    parts = input_str.split(",")
+    tank_capacity = int(parts[0].strip())
+    daily_usage = int(parts[1].strip())
     if daily_usage <= 0:
         return 0.0
     return round(tank_capacity / daily_usage, 2)
@@ -143,7 +146,7 @@ def optimize():
 
         # Use the tools directly to get precise numerical/text results for the frontend cards
         daily_est = calculate_daily_water_usage.invoke({"members": members})
-        tank_dur = estimate_tank_duration.invoke({"tank_capacity": tank_capacity, "daily_usage": daily_usage})
+        tank_dur = estimate_tank_duration.invoke({"input_str": f"{tank_capacity},{daily_usage}"})
         saving_tips = suggest_water_saving_tips.invoke({"area": area})
         bill_est = estimate_water_bill.invoke({"total_usage": daily_usage})
 
