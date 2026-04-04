@@ -10,7 +10,7 @@ It exposes a REST API via Flask that communicates with a LangChain Agent powered
 - ConversationBufferMemory is used to store chat context during execution.
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import os
 from langchain_groq import ChatGroq
@@ -74,6 +74,11 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
 # ====================================================
 
 @app.route('/', methods=['GET'])
+def index():
+    """Serve the frontend HTML."""
+    return send_file('index.html')
+
+@app.route('/health', methods=['GET'])
 def health_check():
     """Simple endpoint to verify that the backend is running."""
     return jsonify({"status": "Backend is running!"})

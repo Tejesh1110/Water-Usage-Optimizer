@@ -1,0 +1,5 @@
+Flask
+flask-cors
+langchain
+langchain-groq
+gunicorn

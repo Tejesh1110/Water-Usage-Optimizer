@@ -375,7 +375,8 @@
     </div>
 
     <script>
-        const API_BASE_URL = "http://127.0.0.1:5000";
+        // For Render deployment and local running from the same server, use empty string to hit relative paths.
+        const API_BASE_URL = "";
         const form = document.getElementById('optimizer-form');
         const clearBtn = document.getElementById('clear-btn');
         const loading = document.getElementById('loading');
