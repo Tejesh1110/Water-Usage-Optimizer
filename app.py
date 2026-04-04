@@ -103,9 +103,14 @@ def optimize():
         custom_question = data.get('question', '')
 
         # Initialize Groq LLM (make sure GROQ_API_KEY is in environment variables)
+        groq_api_key = os.environ.get("GROQ_API_KEY")
+        if not groq_api_key:
+            return jsonify({"error": "GROQ_API_KEY environment variable is not set."}), 500
+
         llm = ChatGroq(
             temperature=0.4, 
-            model_name="llama3-8b-8192" 
+            model_name="llama3-8b-8192",
+            groq_api_key=groq_api_key
         )
 
         # Initialize Langchain Agent using memory and tools
