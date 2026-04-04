@@ -1,6 +1,4 @@
-Flask
+flask
 flask-cors
-langchain==0.2.16
-langchain-community==0.2.16
-langchain-groq==0.1.10
+groq
 gunicorn
